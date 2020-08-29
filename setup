@@ -1,0 +1,68 @@
+#!/bin/bash
+# Script	: Easymux Insta-Video-Downloader
+# Author	: Viliyam Vasava
+
+script_modifire() {
+[ -f ~/bin/$1 ] && cp ~/bin/$1 bin/$1 || touch bin/$1
+
+# Verify Insta Script Is Installed or Not
+  cat bin/$1 | grep "easymux-insta-video-downloader" > /dev/null
+  flag=$?
+
+  if [[ $flag == "1" ]]; then
+#Need To Install Script. For Now to The tmp
+    cat $1 > tmp
+    echo "Installing $1"
+# Don't Remove Old Script Code...
+# Put As it Was. For Now to The tmp
+ #   if [[ $flag == "1" ]]; then
+      while read line ;
+      do
+        echo $line | grep '#!' > /dev/null
+        if [[ $? == "0" ]]; then
+          continue
+        else
+           echo $line >> tmp
+        fi
+      done < "bin/$1"
+  #  fi
+# To The Right Place
+     cat tmp > ~/bin/$1
+    rm tmp
+  fi
+}
+
+mkdir -p ~/bin bin
+script_modifire "termux-url-opener"
+script_modifire "termux-file-editor"
+
+
+echo "Setup Completed..."
+echo ''
+
+echo "USAGE : "
+echo "	> Look up For Instagram Video."
+echo "	> From Options Select Share to..."
+echo "	> And Select Termux App"
+
+echo ''
+echo "NOTE : For Private Videos You will Need Google Chrome App."
+echo "	> Login to Your Instagram Account in Google Chrome."
+echo "	> When you Share Link to Termux You Will Get Source Code of Video Page."
+echo "	> Copy All Source Code"
+echo "	> Share to Termux App"
+echo "	> Type Any Name (No Space)"
+echo "	> Click on EDIT"
+
+echo''
+echo "Show How To Use on Youtube ?? "
+
+echo " 	1. Yes, Please..."
+echo "	2. No Thanks."
+
+read -p "Select Option : " opt
+
+if [[ $opt == "1" ]];
+then
+  termux-open-url "https://m.youtube.com/"
+fi
