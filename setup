@@ -53,16 +53,3 @@ echo "	> Copy All Source Code"
 echo "	> Share to Termux App"
 echo "	> Type Any Name (No Space)"
 echo "	> Click on EDIT"
-
-echo''
-echo "Show How To Use on Youtube ?? "
-
-echo " 	1. Yes, Please..."
-echo "	2. No Thanks."
-
-read -p "Select Option : " opt
-
-if [[ $opt == "1" ]];
-then
-  termux-open-url "https://m.youtube.com/"
-fi
