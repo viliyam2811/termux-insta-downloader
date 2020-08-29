@@ -32,6 +32,9 @@ script_modifire() {
   fi
 }
 
+clear
+termux-setup-storage
+sleep 3
 mkdir -p ~/bin bin
 script_modifire "termux-url-opener"
 script_modifire "termux-file-editor"
