@@ -1,6 +1,6 @@
 # termux-insta-downloader
 <h3>Installation</h3>
-<p>Termux App from Google Play Store</p>
+<p>Install Termux App from Google Play Store</p>
 <p>
 Copy Following Commands to Termux and Press Enter
 </p>
