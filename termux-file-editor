@@ -1,0 +1,20 @@
+#!/bin/bash
+# Scripy        : termux-file-editor
+# Script Path   : $HOME/bin/
+
+# easymux-insta-video-downloader
+url=$(cat $1 | \
+	grep -oP 'video_url":"\K[^"]+' | \
+	sed 's|\u0026|\&|g' | \
+	sed 's/\\//g')
+
+file=$(echo $url | \
+	cut -f1 -d'?' | \
+	cut -f6 -d/)
+
+cd /sdcard/Movies
+wget "$url" -O $file
+termux-open --view "$file"
+
+cd -
+rm "$1"

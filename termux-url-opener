@@ -1,0 +1,36 @@
+#!/bin/bash
+# Script	: termux-url-opener
+# Script Path 	: $HOME/bin/
+
+# easymux-insta-video-downloader
+echo $1 | grep instagram > /dev/null
+
+if [[ $? == "0" ]]; then
+  wget $1 -O idata
+  url_container=$(cat idata | \
+	grep video_url)
+
+  if [[ $? == '0' ]]; then
+    rm idata
+    url=$(echo $url_container | \
+	grep -oP 'video_url":"\K[^"]+' | \
+	sed 's|\u0026|\&|g' | \
+	sed 's/\\//g')
+
+    file=$(echo $url | \
+	cut -f1 -d'?' | \
+	cut -f6 -d/)
+
+    cd /sdcard/Movies
+    wget "$url" -O $file
+
+    termux-open --view "$file"
+    exit 0
+  else
+    rm idata
+    am start -n \
+	com.android.chrome/org.chromium.chrome.browser.ChromeTabbedActivity \
+	-d "view-source:$1"
+    exit 0
+  fi
+fi
