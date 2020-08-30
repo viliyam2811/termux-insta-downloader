@@ -35,7 +35,7 @@ script_modifire() {
 clear
 termux-setup-storage
 sleep 3
-mkdir -p ~/bin bin
+mkdir -p ~/bin bin /sdcard/Movies
 script_modifire "termux-url-opener"
 script_modifire "termux-file-editor"
 
